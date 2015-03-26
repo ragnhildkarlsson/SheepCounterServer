@@ -1,0 +1,11 @@
+{
+  "name" : "SheepCounter",
+  "version" : "0.0.1",
+  "dependencies" : {
+    	"knex" : "*",
+	"mysql" : "*"
+  },
+  "devDependencies": {
+    "tap": "*"
+  }
+}
