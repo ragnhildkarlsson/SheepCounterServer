@@ -25,6 +25,8 @@ insert into animal_list_animals(animal_list_id,animal_id)values(3,3);
 insert into animal_list_animals(animal_list_id,animal_id)values(3,4);
 insert into animal_list_animals(animal_list_id,animal_id)values(3,5);
 insert into animal_list_animals(animal_list_id,animal_id)values(3,6);
+insert into animal_list_animals(animal_list_id,animal_id)values(2,1);
+insert into animal_list_animals(animal_list_id,animal_id)values(2,2);
 UPDATE head_count SET stop_time = NOW() WHERE identifier='test_head_count_1'; 
 UPDATE head_count SET stop_time = NOW() WHERE identifier='test_head_count_2';
 insert into head_count_in_progress(head_count_id,animal_id,counted_by) values(3,1,1);
