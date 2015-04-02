@@ -1,9 +1,7 @@
 function existsInJson(jsonObject,key,value){
-	console.log(jsonObject);
 	var hasMatch =false;
 	for (var index = 0; index < jsonObject.length; ++index) {
 		var object = jsonObject[index];
-		console.log(object);
 		if(object[key] === value){
    			hasMatch = true;
    		break;

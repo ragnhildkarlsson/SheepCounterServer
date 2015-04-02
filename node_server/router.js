@@ -2,7 +2,7 @@ var url = require("url");
 
 function route(handle,request,response){
 	var pathname = url.parse(request.url).pathname;
-	console.log("About to route a request for "+ pathname);
+	console.log("Router recieved request for "+ pathname);
 	if(typeof handle[pathname]=== 'function'){
 		handle[pathname](request,response);
 	}else{

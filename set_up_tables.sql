@@ -16,14 +16,14 @@ PRIMARY KEY(id)
 );
 
 create table animal(
-id BIGINT NOT NULL AUTO_INCREMENT,
-identifier varchar(128) NOT NULL UNIQUE,
-ear_number varchar(64) NOT NULL UNIQUE,
-gender varchar(64) NOT NULL UNIQUE,
-adult TINYINT(1) NOT NULL,
-farm_id BIGINT,
-PRIMARY KEY(id),
-FOREIGN KEY(farm_id) REFERENCES farm(id)
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	identifier varchar(128) NOT NULL UNIQUE,
+	ear_number varchar(64) NOT NULL UNIQUE,
+	gender varchar(64) NOT NULL,
+	adult TINYINT(1) NOT NULL,
+	farm_id BIGINT,
+	PRIMARY KEY(id),
+	FOREIGN KEY(farm_id) REFERENCES farm(id)
 );
 
 create table user(
@@ -46,7 +46,8 @@ create table animal_list(
 	farm_id BIGINT NOT NULL,
 	created_by BIGINT NOT NULL,
 	PRIMARY KEY(id),
-	FOREIGN KEY(created_by) REFERENCES user(id)
+	FOREIGN KEY(created_by) REFERENCES user(id),
+	FOREIGN KEY(farm_id) REFERENCES farm(id)
 );
 
 create table animal_list_access(
@@ -68,19 +69,17 @@ create table head_count(
 	identifier varchar(128) NOT NULL UNIQUE,
 	animal_list_id BIGINT NOT NULL,
 	created_by BIGINT NOT NULL,
-	start_time DATE NOT NULL,
-	stop_time DATE,
+	start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	stop_time datetime,
 	PRIMARY KEY(id),
 	FOREIGN KEY(created_by) REFERENCES user(id),
 	FOREIGN KEY(animal_list_id) REFERENCES animal_list(id)
 );
 
 create table head_count_in_progress(
-	id BIGINT NOT NULL UNIQUE AUTO_INCREMENT,
 	head_count_id BIGINT NOT NULL,
 	animal_id BIGINT NOT NULL,
 	counted_by BIGINT NOT NULL,
-	PRIMARY KEY(id),
 	FOREIGN KEY(head_count_id) REFERENCES head_count(id),
 	FOREIGN KEY(animal_id) REFERENCES animal(id),
 	FOREIGN KEY(counted_by) REFERENCES user(id)
@@ -93,3 +92,7 @@ ADD CONSTRAINT unique_names_in_farm UNIQUE (name,farm_id);
 
 ALTER TABLE animal_list_access
 ADD CONSTRAINT unique_accessors UNIQUE (user_id,animal_list_id);
+
+ALTER TABLE head_count_in_progress
+ADD CONSTRAINT unique_counting_information UNIQUE (head_count_id,animal_id, counted_by);
+
